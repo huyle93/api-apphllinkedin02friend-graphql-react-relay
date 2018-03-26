@@ -1,0 +1,33 @@
+{
+  "name": "api-apphllinkedin02friend-graphql-react-relay",
+  "version": "1.0.0",
+  "description": "graphql api built for react consuming",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huyle93/api-apphllinkedin02friend-graphql-react-relay.git"
+  },
+  "keywords": [
+    "graphql",
+    "react",
+    "relay",
+    "api"
+  ],
+  "author": "huy le",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huyle93/api-apphllinkedin02friend-graphql-react-relay/issues"
+  },
+  "homepage": "https://github.com/huyle93/api-apphllinkedin02friend-graphql-react-relay#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "express": "^4.16.3"
+  }
+}
