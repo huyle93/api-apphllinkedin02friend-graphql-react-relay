@@ -2,3 +2,6 @@ node_modules/
 
 #IDE
 .vscode/
+
+#trash
+yarn-error.log
