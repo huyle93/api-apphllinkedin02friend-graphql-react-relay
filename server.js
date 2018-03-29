@@ -9,20 +9,40 @@ app.get('/', (req, res) => {
     res.send('GraphQL & Relay modern is cool!!!');
 });
 
-const root = { attorney: (args) => {
-    return {
-        "id": 123124345,
-        "firstName": "Mike",
-        "lastName": "Gildersleeve",
-        "language": "English",
-        "state": "Vermont",
-        "IDTyped": args.id
+// attorney class
+class Attorney {
+    constructor(id, {firstName, lastName, language, state}) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.language = language;
+        this.state = state;
     }
-} };
+}
+
+// in memmory database, lost if refreshing
+const attorneyDatabase = {};
+
+// mutation methods - resolver 
+// function that returns what the query is asking for
+const global = { 
+    getAttorney: ({id}) => {
+        return new Attorney(id, attorneyDatabase[id])
+    },
+    createAttorney: ({input}) => {
+        let id = require('crypto').randomBytes(10).toString('hex')
+        attorneyDatabase[id] = input
+        return new Attorney(id, input)
+    },
+    updateAttorney: ({id, input}) => {
+        attorneyDatabase[id] = input
+        return new Attorney(id, input)
+    }
+ };
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
-    rootValue: root,
+    rootValue: global,
     graphiql: true, // turn on and off for the server
 }));
 
