@@ -1,49 +1,47 @@
 import express from 'express';
 import graphqlHTTP from "express-graphql";
 import schema from './schema';
+import path from 'path';
+import webpack from 'webpack';
+import WebPackDevServer from 'webpack-dev-server';
+import { schema } from './data/database'; // keep there for now
 
+const APP_PORT = 3000;
+const GRAPHQL_PORT = 8080;
 
-const app = express();
-
-app.get('/', (req, res) => {
-    res.send('GraphQL & Relay modern is cool!!!');
-});
-
-// attorney class
-class Attorney {
-    constructor(id, {firstName, lastName, language, state}) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.language = language;
-        this.state = state;
-    }
-}
-
-// in memmory database, lost if refreshing
-const attorneyDatabase = {};
-
-// mutation methods - resolver 
-// function that returns what the query is asking for
-const global = { 
-    getAttorney: ({id}) => {
-        return new Attorney(id, attorneyDatabase[id])
-    },
-    createAttorney: ({input}) => {
-        let id = require('crypto').randomBytes(10).toString('hex')
-        attorneyDatabase[id] = input
-        return new Attorney(id, input)
-    },
-    updateAttorney: ({id, input}) => {
-        attorneyDatabase[id] = input
-        return new Attorney(id, input)
-    }
- };
-
-app.use('/graphql', graphqlHTTP({
+// GraphQL server
+const graphQLServer = express();
+graphQLServer.use('/', graphqlHTTP({
     schema: schema,
-    rootValue: global,
+    pretty: true, // Prettify the query
     graphiql: true, // turn on and off for the server
 }));
 
-app.listen(8080, () => console.log('Magic is on localhost:8080/graphql'));
+graphQLServer.listen(GRAPHQL_PORT, () => console.log(`GraphQL server is on localhost:${GRAPHQL_PORT}`));
+
+// Relay App
+const compiler = webpack({
+    entry:['whatwg-fetch', path.resolve(__dirname, 'src', 'App.js')],
+    module: {
+        loaders: [
+            {
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                test: /\.js$/,
+            },
+        ],
+    },
+    output: {filename: 'App.js', path: '/'}
+});
+
+const app = new WebPackDevServer(compiler, {
+    contentBase: '/public/',
+    proxy: {'/graphql': `http://localhost:${APP_PORT}`},
+    publicPath: '/src/',
+    stats: {colors: true},
+})
+
+app.use('/', express.static(path.resolve(__dirname, 'public')));
+app.listen(APP_PORT, () => {
+    console.log(`App is on running on localhost:${APP_PORT}`)
+});
