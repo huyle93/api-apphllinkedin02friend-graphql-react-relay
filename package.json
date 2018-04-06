@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/huyle93/api-apphllinkedin02friend-graphql-react-relay#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "relay-compiler": "^1.0.0"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -41,6 +42,8 @@
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
     "graphql-relay": "^0.5.4",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
     "react-relay": "^1.5.0",
     "relay-compiler": "^1.5.0",
     "webpack": "^1.13.2",

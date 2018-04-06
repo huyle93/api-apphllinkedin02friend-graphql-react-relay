@@ -5,3 +5,7 @@ node_modules/
 
 #trash
 yarn-error.log
+
+#build
+src/__generated__/
+src/components/__generated__/

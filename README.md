@@ -15,6 +15,9 @@ for the particular referenced version.
 ## Local run
 
 ```
+yarn
+yarn update-schema
+yarn relay
 yarn start
 ```
 

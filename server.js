@@ -1,9 +1,9 @@
 import express from 'express';
-import graphqlHTTP from "express-graphql";
+import graphqlHTTP from 'express-graphql';
 import path from 'path';
 import webpack from 'webpack';
 import WebPackDevServer from 'webpack-dev-server';
-import { schema } from './data/schema';
+import { schema } from './data/schema'; 
 
 const APP_PORT = 3000;
 const GRAPHQL_PORT = 8080;
@@ -12,13 +12,12 @@ const GRAPHQL_PORT = 8080;
 const graphQLServer = express();
 graphQLServer.use('/', graphqlHTTP({
     schema: schema,
-    pretty: true, // Prettify the query
-    graphiql: true, // turn on and off for the server
+    pretty: true,
+    graphiql: true,
 }));
+graphQLServer.listen(GRAPHQL_PORT, () => console.log(`GraphQL server on localhost:${GRAPHQL_PORT}`));
 
-graphQLServer.listen(GRAPHQL_PORT, () => console.log(`GraphQL server is on localhost:${GRAPHQL_PORT}`));
-
-// Relay App
+// Relay
 const compiler = webpack({
     entry:['whatwg-fetch', path.resolve(__dirname, 'src', 'App.js')],
     module: {
@@ -35,12 +34,10 @@ const compiler = webpack({
 
 const app = new WebPackDevServer(compiler, {
     contentBase: '/public/',
-    proxy: {'/graphql': `http://localhost:${APP_PORT}`},
+    proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}`},
     publicPath: '/src/',
     stats: {colors: true},
-})
+});
 
 app.use('/', express.static(path.resolve(__dirname, 'public')));
-app.listen(APP_PORT, () => {
-    console.log(`App is on running on localhost:${APP_PORT}`)
-});
+app.listen(APP_PORT, () => console.log(`App is now running on localhost:${APP_PORT}`));
