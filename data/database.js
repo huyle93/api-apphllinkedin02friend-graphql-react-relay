@@ -1,29 +1,29 @@
 import data from './data.json';
 
 class User {}
-class Friend {}
+class Attorney {}
 
 // Mock data
 const viewer = new User();
 viewer.id = '1';
 viewer.name = 'huy';
-const friends = data.map((obj) => {
-    const friend = new Friend();
-    friend.id = require('crypto').randomBytes(10).toString('hex');
-    friend.firstName = obj.firstName;
-    friend.lastName = obj.lastName;
-    friend.gender = obj.gender;
-    friend.language = obj.language;
-    friend.email = obj.email;
-    friend.image = obj.image;
-    return friend;
+const attorney = data.map((obj) => {
+    const attorney = new Attorney();
+    attorney.id = require('crypto').randomBytes(10).toString('hex');
+    attorney.firstName = obj.firstName;
+    attorney.lastName = obj.lastName;
+    attorney.gender = obj.gender;
+    attorney.language = obj.language;
+    attorney.email = obj.email;
+    attorney.image = obj.image;
+    return attorney;
 })
 
 module.exports = {
     getUser: (id) => id === viewer.id ? viewer : null, // if id correct, return viewer.id. if not, return null
     getViewer: () => viewer,
-    getFriend: (id) => friends.find(w => w.id == id), // find w.id then return it
-    getFriends: () => friends,
+    getAttorney: (id) => attorney.find(w => w.id == id), // find w.id then return it
+    getAttorneys: () => attorney,
     User,
-    Friend,
+    Attorney,
 }

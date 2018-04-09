@@ -1,4 +1,4 @@
-type Friend {
+type Attorney {
   """The ID of an object"""
   id: ID!
   firstName: String
@@ -10,18 +10,18 @@ type Friend {
 }
 
 """A connection to a list of items."""
-type FriendConnection {
+type AttorneyConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [FriendEdge]
+  edges: [AttorneyEdge]
 }
 
 """An edge in a connection."""
-type FriendEdge {
+type AttorneyEdge {
   """The item at the end of the edge"""
-  node: Friend
+  node: Attorney
 
   """A cursor for use in pagination"""
   cursor: String!
@@ -60,5 +60,5 @@ type Query {
 type User {
   """The ID of an object"""
   id: ID!
-  friends(after: String, first: Int, before: String, last: Int): FriendConnection
+  attorneys(after: String, first: Int, before: String, last: Int): AttorneyConnection
 }

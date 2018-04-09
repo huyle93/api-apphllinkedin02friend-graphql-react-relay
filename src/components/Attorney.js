@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-class Friend extends Component {
+class Attorney extends Component {
     render() {
         return (
             <li>
-                {this.props.friend.firstName}
-                {this.props.friend.lastName}
+                {this.props.attorney.firstName}
+                {this.props.attorney.lastName}
             </li>
         )
     }
 }
 
-export default createFragmentContainer(Friend, {
-    friend: graphql`
-        fragment Friend_friend on Friend {
+export default createFragmentContainer(Attorney, {
+    attorney: graphql`
+        fragment Attorney_attorney on Attorney {
             id,
             firstName,
             lastName,
@@ -24,7 +24,7 @@ export default createFragmentContainer(Friend, {
         }
     `,
     viewer: graphql`
-        fragment Friend_viewer on User {
+        fragment Attorney_viewer on User {
             id,
         }
     `,

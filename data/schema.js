@@ -16,9 +16,9 @@ import {
 
 import {
     User,
-    Friend,
-    getFriend,
-    getFriends,
+    Attorney,
+    getAttorney,
+    getAttorneys,
     getViewer,
 } from './database';
 
@@ -28,16 +28,16 @@ import {
 const {nodeInterface, nodeField} = nodeDefinitions(
     (globalId) => {
         const {type, id} = fromGlobalId(globalId);
-        if (type === 'Friend') {
-            return getFriend(id);
+        if (type === 'Attorney') {
+            return getAttorney(id);
         } else if (type === 'User') {
             return getUser(id);
         }
         return null;
     },
     (obj) => {
-        if (obj instanceof Friend) {
-            return GraphQLFriend;
+        if (obj instanceof Attorney) {
+            return GraphQLAttorney;
         } else if (obj instanceof User) {
             return GraphQLUser;
         }
@@ -49,19 +49,19 @@ const GraphQLUser = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
         id: globalIdField('User'),
-        friends: {
-            type: friendsConnection,
+        attorneys: {
+            type: attorneysConnection,
             args: connectionArgs,
-            resolve: (_, args) => connectionFromArray(getFriends(), args),
+            resolve: (_, args) => connectionFromArray(getAttorneys(), args),
         },
     }),
     interface: [nodeInterface],
 });
 
-const GraphQLFriend = new GraphQLObjectType({
-    name: 'Friend',
+const GraphQLAttorney = new GraphQLObjectType({
+    name: 'Attorney',
     fields: () => ({
-        id: globalIdField('Friend'),
+        id: globalIdField('Attorney'),
         firstName: {
             type: GraphQLString,
         },
@@ -84,8 +84,8 @@ const GraphQLFriend = new GraphQLObjectType({
     interface: [nodeInterface],
 });
 
-// establish friendsConnection
-const { connectionType: friendsConnection } = connectionDefinitions({ name: 'Friend', nodeType: GraphQLFriend });
+// establish attorneysConnection
+const { connectionType: attorneysConnection } = connectionDefinitions({ name: 'Attorney', nodeType: GraphQLAttorney });
 
 const Query = new GraphQLObjectType({
     name: 'Query',

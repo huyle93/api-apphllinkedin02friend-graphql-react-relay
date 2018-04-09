@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import Friend from './Friend';
-class FriendsList extends Component {
-    renderFriends() {
-        return this.props.viewer.friends.edges.map(edges => 
-        <Friend
+import Attorney from './Attorney';
+class AttorneysList extends Component {
+    renderAttorneys() {
+        return this.props.viewer.attorneys.edges.map(edges => 
+        <Attorney
             key={edge.node.id}
-            friend={edge.node}
+            attorney={edge.node}
             viewer={this.props.viewer}
             />
         );
@@ -16,7 +16,7 @@ class FriendsList extends Component {
             <div>
                 <div className = "row">
                     <ul>
-                        {this.renderFriends()}
+                        {this.renderAttorneys()}
                     </ul>
                 </div>
             </div>
@@ -24,19 +24,19 @@ class FriendsList extends Component {
     }
 }
 
-export default createFragmentContainer(FriendsList, {
+export default createFragmentContainer(AttorneysList, {
     viewer: graphql`
-        fragment FriendsList_viewer on User {
-            friends {
+        fragment AttorneysList_viewer on User {
+            attorneys {
                 edges {
                     node {
                         id,
-                        ...Friend_friend,
+                        ...Attorney_attorney,
                     },
                 },
             },
             id,
-            ...Friend_viewer,
+            ...Attorney_viewer,
         }
     `,
 });

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { QueryRenderer, graphql } from 'react-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
-import Friends from './components/Friends';
+import Attorneys from './components/Attorneys';
 
 // Network layer
 function fetchQuery( operation, variables) {
@@ -35,14 +35,14 @@ ReactDOM.render(
         query={graphql`
             query AppQuery {
                 viewer {
-                    ...Friends_viewer
+                    ...Attorneys_viewer
                 }
             }
         `}
         variables={{}}
         render={({error, props}) => {
             if (props) {
-                return <Friends viewer={props.viewer} />;
+                return <Attorneys viewer={props.viewer} />;
             } else {
                 return <div>Loading...</div>;
             }
