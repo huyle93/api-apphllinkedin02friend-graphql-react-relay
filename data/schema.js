@@ -19,6 +19,7 @@ import {
     Attorney,
     getAttorney,
     getAttorneys,
+    getUser,
     getViewer,
 } from './database';
 

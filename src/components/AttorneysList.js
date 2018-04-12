@@ -3,7 +3,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import Attorney from './Attorney';
 class AttorneysList extends Component {
     renderAttorneys() {
-        return this.props.viewer.attorneys.edges.map(edges => 
+        return this.props.viewer.attorneys.edges.map(edge => 
         <Attorney
             key={edge.node.id}
             attorney={edge.node}
@@ -27,9 +27,9 @@ class AttorneysList extends Component {
 export default createFragmentContainer(AttorneysList, {
     viewer: graphql`
         fragment AttorneysList_viewer on User {
-            attorneys {
-                edges {
-                    node {
+            attorneys   {
+                edges   {
+                    node    {
                         id,
                         ...Attorney_attorney,
                     },

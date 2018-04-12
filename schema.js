@@ -5,16 +5,18 @@ const schema = buildSchema(`
         id: ID
         firstName: String
         lastName: String
+        gender: String
         language: String
-        state: String
+        email: String
     }
 
     type Attorney {
         id: ID
         firstName: String
         lastName: String
+        gender: String
         language: String
-        state: String
+        email: String
     }
 
     type Query {
