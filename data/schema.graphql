@@ -4,9 +4,11 @@ type Attorney {
   firstName: String
   lastName: String
   gender: String
-  language: String
-  email: String
-  image: String
+  avgWinRatio: Float
+  totalWinCase: Float
+  avgWin_ThomasDurkin: Float
+  avgWin_JohnZaikowski: Float
+  avgWin_TonyAdam: Float
 }
 
 """A connection to a list of items."""

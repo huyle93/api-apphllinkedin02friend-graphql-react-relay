@@ -2,6 +2,7 @@ import {
     GraphQLObjectType,
     GraphQLSchema,
     GraphQLString,
+    GraphQLFloat,
 } from 'graphql';
 
 import {
@@ -72,15 +73,21 @@ const GraphQLAttorney = new GraphQLObjectType({
         gender: {
             type: GraphQLString,
         },
-        language: {
-            type: GraphQLString,
+        avgWinRatio: {
+            type: GraphQLFloat,
         },
-        email: {
-            type: GraphQLString,
+        totalWinCase: {
+            type: GraphQLFloat,
         },
-        image: {
-            type: GraphQLString,
+        avgWin_ThomasDurkin: {
+            type: GraphQLFloat,
         },
+        avgWin_JohnZaikowski: {
+            type: GraphQLFloat,
+        },
+        avgWin_TonyAdam: {
+            type: GraphQLFloat,
+        }
     }),
     interface: [nodeInterface],
 });

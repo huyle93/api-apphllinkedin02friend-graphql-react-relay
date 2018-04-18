@@ -13,9 +13,11 @@ const attorney = data.map((obj) => {
     attorney.firstName = obj.firstName;
     attorney.lastName = obj.lastName;
     attorney.gender = obj.gender;
-    attorney.language = obj.language;
-    attorney.email = obj.email;
-    attorney.image = obj.image;
+    attorney.avgWinRatio = obj.avgWinRatio;
+    attorney.totalWinCase = obj.totalWinCase;
+    attorney.avgWin_ThomasDurkin = obj.avgWin_ThomasDurkin;
+    attorney.avgWin_JohnZaikowski = obj.avgWin_JohnZaikowski;
+    attorney.avgWin_TonyAdam = obj.avgWin_TonyAdam;
     return attorney;
 })
 
