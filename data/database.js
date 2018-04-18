@@ -7,7 +7,7 @@ class Attorney {}
 const viewer = new User();
 viewer.id = '1';
 viewer.name = 'huy';
-const attorney = data.map((obj) => {
+const attorneys = data.map((obj) => {
     const attorney = new Attorney();
     attorney.id = require('crypto').randomBytes(10).toString('hex');
     attorney.firstName = obj.firstName;
@@ -22,8 +22,8 @@ const attorney = data.map((obj) => {
 module.exports = {
     getUser: (id) => id === viewer.id ? viewer : null, // if id correct, return viewer.id. if not, return null
     getViewer: () => viewer,
-    getAttorney: (id) => attorney.find(w => w.id == id), // find w.id then return it
-    getAttorneys: () => attorney,
+    getAttorney: (id) => attorneys.find(w => w.id == id), // find w.id then return it
+    getAttorneys: () => attorneys,
     User,
     Attorney,
 }
